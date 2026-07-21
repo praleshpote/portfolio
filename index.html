@@ -3,16 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pralesh Pote">
-  <title>Pralesh Pote | IT Support & Systems Operations</title>
-  
-  <!-- Google Fonts -->
+  <title>Pralesh Pote | Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   
-  <!-- Linked CSS File -->
-  <link rel="stylesheet" href="./style.css">
+  <style>
+    :root {
+      --navy: #0e2222;
+      --navy2: #163333;
+      --accent: #dca858;
+      --accent-glow: rgba(220, 168, 88, 0.35);
+      --cream: #f6f3eb;
+      --paper: #ffffff;
+      --ink: #141c1b;
+      --muted: #5e6b66;
+      --line: rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+    /* HEADER & NAV */
+    .header {
+      height: 88px;
+      padding: 0 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(246, 243, 235, 0.9);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+
+    .identity { display: flex; align-items: center; gap: 14px; }
+    .identity strong { font-family: "Playfair Display", serif; font-size: 19px; display: block; }
+    .identity small { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    .monogram {
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+    }
+
+    .identity:hover .monogram {
+      transform: rotate(-6deg) scale(1.05);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .header nav { display: flex; gap: 28px; align-items: center; font-size: 13px; font-weight: 600; }
+    .header nav > a:not(.nav-button) { position: relative; padding: 4px 0; }
+    .header nav > a:not(.nav-button)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .header nav > a:not(.nav-button):hover::after { width: 100%; }
+
+    .nav-button, .primary {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 26px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(14, 34, 34, 0.2);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-button:hover, .primary:hover {
+      background: var(--accent);
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--accent-glow);
+    }
+
+    .secondary {
+      border-bottom: 2px solid var(--ink);
+      padding: 8px 4px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .secondary:hover { color: var(--accent); border-color: var(--accent); }
+
+    .menu { display: none; }
+
+    /* HERO */
+    .hero {
+      min-height: calc(100vh - 88px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      padding: 60px 8vw;
+      gap: 6vw;
+      align-items: center;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3, blockquote { font-family: "Playfair Display", serif; }
+    h1 {
+      font-size: clamp(48px, 5.5vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 15px 0 25px;
+    }
+
+    em { font-style: italic; color: var(--accent); font-weight: 600; }
+    .intro { font-size: 18px; max-width: 620px; color: var(--muted); }
+    .actions { display: flex; gap: 20px; align-items: center; margin: 36px 0; }
+
+    .specialties {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 40px;
+      opacity: 0.8;
+    }
+
+    .hero-visual { position: relative; }
+    .portrait-frame {
+      height: 520px;
+      background: linear-gradient(145deg, var(--navy), var(--navy2));
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .portrait-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .portrait-mark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      color: white;
+      z-index: 2;
+    }
+
+    .portrait-mark span {
+      font: 700 120px/1 "Playfair Display", serif;
+      background: linear-gradient(180deg, #fff 30%, rgba(255, 255, 255, 0.2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .portrait-mark small { letter-spacing: 0.3em; text-transform: uppercase; font-size: 11px; opacity: 0.7; }
+
+    .availability {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 10px 18px;
+      font-size: 11px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 3;
+    }
+
+    .availability i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+      margin-right: 8px;
+    }
+
+    .experience-badge {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      background: var(--accent);
+      color: var(--navy);
+      padding: 22px 28px;
+      border-radius: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+    .experience-badge:hover { transform: scale(1.05); }
+    .experience-badge strong { font: 700 44px/1 "Playfair Display", serif; }
+    .experience-badge span { font-size: 11px; text-transform: uppercase; font-weight: 700; line-height: 1.3; }
+
+    /* SECTIONS */
+    .intro-section, .expertise, .projects, .process, .education, .resume-section { padding: 120px 8vw; }
+
+    .intro-section {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 8vw;
+      align-items: center;
+      background: var(--paper);
+    }
+
+    .intro-text blockquote {
+      font-size: 22px;
+      color: var(--navy);
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      margin: 24px 0;
+      font-style: italic;
+    }
+
+    .intro-text h2, .section-title h2, .resume-copy h2 {
+      font-size: clamp(38px, 4.5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 20px 0 25px;
+    }
+    .intro-text > p:not(.kicker) { color: var(--muted); font-size: 16px; margin-bottom: 20px; }
+
+    /* EXPERTISE */
+    .feature-expertise {
+      display: grid;
+      grid-template-columns: 0.3fr 1fr;
+      gap: 4vw;
+      background: var(--navy);
+      color: white;
+      padding: 60px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      margin-top: 40px;
+    }
+    .feature-expertise h3 { font-size: 38px; margin: 0 0 16px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .chips span {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      transition: var(--transition);
+    }
+    .chips span:hover { background: var(--accent); color: var(--navy); border-color: var(--accent); }
+
+    .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+    .expertise-grid article {
+      padding: 40px;
+      background: var(--paper);
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      transition: var(--transition);
+    }
+    .expertise-grid article:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06); border-color: var(--accent); }
+    .expertise-grid span { color: var(--accent); font: 700 14px "Playfair Display", serif; }
+    .expertise-grid h3 { font-size: 24px; margin: 20px 0 12px; }
+    .expertise-grid p { color: var(--muted); font-size: 14px; margin: 0; }
+
+    /* CONTACT & FOOTER */
+    .contact { background: var(--navy); color: white; text-align: center; padding: 130px 8vw; border-radius: 32px 32px 0 0; }
+    .contact h2 { font-size: clamp(48px, 6vw, 84px); line-height: 1.02; margin: 20px 0; }
+    .contact > p:not(.kicker) { color: rgba(255, 255, 255, 0.7); max-width: 650px; margin: auto; font-size: 18px; }
+    .center { justify-content: center; }
+    .cream { background: var(--cream); color: var(--navy); }
+    .cream:hover { background: var(--accent); color: var(--navy); }
+    .light-border { color: white; border: 1px solid rgba(255, 255, 255, 0.3); padding: 14px 26px; border-radius: 50px; }
+    .light-border:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-details { display: flex; justify-content: center; gap: 40px; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 13px; color: rgba(255, 255, 255, 0.7); }
+
+    footer { background: #081616; color: white; padding: 40px 6vw; display: flex; align-items: center; justify-content: space-between; }
+    footer > p { font: italic 18px "Playfair Display", serif; color: var(--accent); margin: 0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .header nav {
+        display: none; position: absolute; top: 88px; left: 0; right: 0; background: var(--cream);
+        padding: 30px; flex-direction: column; align-items: flex-start; box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      }
+      .header nav.open { display: flex; }
+      .menu { display: block; background: none; border: 0; cursor: pointer; }
+      .menu span { display: block; width: 25px; height: 2px; background: var(--ink); margin: 6px 0; }
+      .hero, .intro-section { grid-template-columns: 1fr; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .feature-expertise { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -23,8 +346,6 @@
     <button class="menu" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
     <nav>
       <a href="#expertise">Expertise</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
       <a class="nav-button" href="http://praleshpote.com.np" target="_blank">praleshpote.com.np</a>
@@ -56,34 +377,12 @@
       </div>
     </section>
 
-    <section class="statement">
-      <p>Service-first support <span>·</span> Practical troubleshooting <span>·</span> Reliable IT operations</p>
-    </section>
-
-    <section class="metrics">
-      <div><strong data-count="6">6+</strong><span>Years supporting IT operations</span></div>
-      <div><strong data-count="65">65+</strong><span>Employees supported</span></div>
-      <div><strong data-count="200">200+</strong><span>Technology assets managed</span></div>
-      <div><strong>40–50</strong><span>Support requests weekly (osTicket)</span></div>
-    </section>
-
     <section class="intro-section" id="about">
-      <div class="image-composition">
-        <div class="server-art">
-          <div class="server-row"><i></i><i></i><i></i><b></b></div>
-          <div class="server-row"><i></i><i></i><i></i><b></b></div>
-          <div class="server-row"><i></i><i></i><i></i><b></b></div>
-          <div class="server-row"><i></i><i></i><i></i><b></b></div>
-        </div>
-        <div class="asset-card"><strong>200+</strong><span>IT assets managed</span></div>
-      </div>
       <div class="intro-text">
         <p class="kicker">Support & commitment</p>
         <blockquote>“Technology should help people do their best work—not stand in their way.”</blockquote>
         <h2>The professional behind the support desk.</h2>
-        <p>I am an IT Support Specialist experienced in managing enterprise IT infrastructure across multiple business locations. I have supported 65+ users, managed 200+ assets, and resolved 40–50 support tickets weekly using osTicket.</p>
-        <p>My core focus is delivering fast, dependable technical resolution across hardware, software, user access, and networking—ensuring high uptime and smooth day-to-day operations.</p>
-        <a class="secondary" href="#experience">Read my experience →</a>
+        <p>I am an IT Support Specialist experienced in managing enterprise IT infrastructure across multiple business locations. I have supported 65+ users, managed 200+ assets, and resolved support tickets efficiently.</p>
       </div>
     </section>
 
@@ -91,148 +390,27 @@
       <div class="section-title">
         <p class="kicker">Areas of specialization</p>
         <h2>Technical precision.<br><em>Human support.</em></h2>
-        <p>From end-user support to infrastructure management, I provide practical technical solutions that protect productivity.</p>
       </div>
 
       <article class="feature-expertise">
         <div class="number">01 — Core specialty</div>
         <div>
           <h3>Tier 1–3 Technical Support & End-User Care</h3>
-          <p>Full-cycle support across desktop, laptop, printer, peripheral hardware, software, password resets, user provisioning, and osTicket incident management.</p>
-          <div class="chips"><span>Tier 1–3 Support</span><span>osTicket</span><span>User Provisioning</span><span>Password Resets</span><span>Hardware & Software</span><span>Printer Support</span></div>
+          <p>Full-cycle support across desktop, laptop, printer, peripheral hardware, software, password resets, user provisioning, and incident management.</p>
+          <div class="chips"><span>Tier 1–3 Support</span><span>osTicket</span><span>User Provisioning</span><span>Password Resets</span><span>Hardware & Software</span></div>
         </div>
       </article>
 
       <div class="expertise-grid">
-        <article><span>02</span><h3>Microsoft & Identity</h3><p>Windows 10/11, Windows Server, Microsoft 365, Outlook, Teams, Active Directory, and Microsoft Entra ID (Azure AD).</p></article>
-        <article><span>03</span><h3>Networking & VPN</h3><p>TCP/IP, DNS, DHCP, Sophos SSL VPN (OpenVPN), LAN/WAN, Wi-Fi, switching, firewalls, and dual ISP connectivity.</p></article>
-        <article><span>04</span><h3>Infrastructure & Cloud</h3><p>Windows Server Administration, VMware, Microsoft Azure, Azure Virtual Machines, PBX/VoIP, CCTV, Access Control, POS, and Digital Signage.</p></article>
-      </div>
-    </section>
-
-    <section class="experience" id="experience">
-      <div class="section-title light">
-        <p class="kicker">Professional journey</p>
-        <h2>Experience built through<br><em>real operational responsibility.</em></h2>
-      </div>
-
-      <div class="experience-list">
-        <article>
-          <div class="date">AUG 2025 — JAN 2026</div>
-          <div class="role">
-            <p>EV Buddy Inc. · New Jersey, United States</p>
-            <h3>IT Intern — Systems Operations</h3>
-            <ul>
-              <li>Supported Azure-based infrastructure initiatives, application deployments, system testing, troubleshooting, and technical documentation while collaborating with development and project teams.</li>
-              <li>Assisted with REST APIs, microservices, React applications, testing, deployment, troubleshooting, and technical documentation in an Agile environment.</li>
-              <li>Prepared technical presentations, project documentation, and implementation materials to support internal teams and business stakeholders.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article>
-          <div class="date">MAR 2018 — SEP 2024</div>
-          <div class="role">
-            <p>Cinestar Private Limited, BigMovies · Kathmandu, Nepal</p>
-            <h3>IT Systems & Support Specialist</h3>
-            <ul>
-              <li>Managed IT infrastructure across 2 cinema locations, supporting 65+ employees, maintaining 200+ IT assets, and resolving 40–50 support requests weekly via osTicket.</li>
-              <li>Installed, configured, and supported desktops, laptops, printers, and peripheral devices with remote and onsite assistance.</li>
-              <li>Administered 3 Windows Servers, 1 application server, Microsoft 365, Active Directory, dual ISP connectivity, PBX, CCTV, access control systems, POS terminals, and digital signage.</li>
-              <li>Managed Active Directory user accounts, password resets, Microsoft 365 email provisioning, workstation setup, and Sophos SSL VPN (.ovpn) client configurations.</li>
-              <li>Maintained 50 desktops, 20 POS terminals, 20 printers, 18 IP phones, 64 CCTV cameras, and 12 access control devices through active lifecycle management.</li>
-              <li>Diagnosed network connectivity issues (TCP/IP, DNS, DHCP, wireless, firewalls, ISP, and VPN) to guarantee uninterrupted operations.</li>
-              <li>Coordinated with vendors, ISPs, developers, and payment providers for updates, backups, documentation, and system deployments.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article>
-          <div class="date">AUG 2017 — MAR 2018</div>
-          <div class="role">
-            <p>Subisu Cablenet Limited · Kathmandu, Nepal</p>
-            <h3>L1 Technical Support Specialist</h3>
-            <ul>
-              <li>Resolved 20–30 customer support requests daily via remote and onsite support for internet connectivity, modem configuration, and network issues.</li>
-              <li>Installed and activated DOCSIS cable modem services, registered customer devices using MAC address binding, and partnered with Tier 2/3 engineers for complex escalations.</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="projects" id="projects">
-      <div class="section-title">
-        <p class="kicker">Selected work</p>
-        <h2>Systems, implementation,<br><em>and continuous improvement.</em></h2>
-      </div>
-      <div class="project-grid">
-        <article class="project featured">
-          <span>01</span><p>AI Workforce Platform</p><h3>Nexus AI</h3><p class="description">Built an AI-powered task management platform using Python, FastAPI, PostgreSQL, React, and Tailwind CSS.</p>
-          <div class="chips"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>React</span><span>Tailwind CSS</span></div>
-        </article>
-        <article class="project">
-          <span>02</span><p>Enterprise Rollout</p><h3>ERP Implementation</h3><p class="description">Supported ERP deployment, testing, User Acceptance Testing (UAT), rollout, training, and post-go-live support across 20+ business systems at Cinestar Pvt. Ltd.</p>
-          <div class="chips"><span>UAT</span><span>Deployment</span><span>Training</span><span>Post-Go-Live Support</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="process">
-      <div class="section-title">
-        <p class="kicker">My support approach</p>
-        <h2>Simple. Clear.<br><em>Resolved with care.</em></h2>
-      </div>
-      <div class="steps">
-        <article><span>1</span><h3>Listen</h3><p>Understand the user’s issue, urgency, and operational impact.</p></article>
-        <article><span>2</span><h3>Diagnose</h3><p>Gather logs, reproduce errors, and isolate hardware or network causes.</p></article>
-        <article><span>3</span><h3>Resolve</h3><p>Apply effective solutions while keeping downtime minimal.</p></article>
-        <article><span>4</span><h3>Verify</h3><p>Confirm issue resolution directly with the user and verify related workflows.</p></article>
-        <article><span>5</span><h3>Document</h3><p>Log technical documentation in osTicket to prevent future occurrences.</p></article>
-      </div>
-    </section>
-
-    <section class="resume-section" id="resume">
-      <div class="resume-copy">
-        <p class="kicker">Resume Snapshot</p>
-        <h2>A closer look at my<br><em>qualifications.</em></h2>
-        <p>Experienced in Active Directory, Microsoft 365, Azure, Windows Server administration, osTicket, network engineering, and enterprise infrastructure.</p>
-        <div class="actions">
-          <a class="primary" href="mailto:praleshpote@gmail.com">Contact for Resume</a>
-          <a class="secondary" href="http://praleshpote.com.np" target="_blank">Visit praleshpote.com.np</a>
-        </div>
-      </div>
-      <div class="resume-paper">
-        <div class="paper-head"><div><strong>Pralesh Pote</strong><br><small>IT Support Specialist</small></div><b>PP</b></div>
-        <hr>
-        <small>PROFESSIONAL SUMMARY</small>
-        <p style="font-size: 13px; color: #555;">6+ years supporting Windows, Microsoft 365, Active Directory, and Windows Server infrastructure across multiple locations.</p>
-        <small>CORE EXPERTISE</small>
-        <div class="paper-columns"><span>Microsoft 365</span><span>Active Directory</span><span>Windows Server</span><span>Networking</span><span>Azure</span><span>osTicket</span></div>
-        <small>EXPERIENCE</small>
-        <h4 style="margin: 5px 0 0;">IT Systems & Support Specialist</h4>
-        <p style="font-size: 12px; margin: 0; color: #777;">Cinestar Private Limited · 2018–2024</p>
-        <div class="paper-lines"><i></i><i></i><i></i></div>
-      </div>
-    </section>
-
-    <section class="education">
-      <div class="section-title">
-        <p class="kicker">Education & credentials</p>
-        <h2>Grounded in learning.<br><em>Focused on growth.</em></h2>
-      </div>
-      <div class="education-list">
-        <article><span>OCT 2024 — MAY 2026</span><div><h3>Master of Science in Information Systems</h3><p>Indiana Institute of Technology — Fort Wayne, United States</p><small>Outstanding Graduate Award Nominee · Alpha Chi National College Honor Society (Top 10% of Class)</small></div></article>
-        <article><span>SEP 2014 — SEP 2017</span><div><h3>Bachelor of Science in Networking and IT Security</h3><p>Islington College — Kathmandu, Nepal</p></div></article>
-        <article><span>Certified</span><div><h3>Google IT Support Professional Certificate</h3><p>Technical Support Fundamentals · System Administration and IT Infrastructure Services</p></div></article>
-        <article><span>In progress</span><div><h3>CompTIA A+</h3><p>Expected 2026</p></div></article>
+        <article><span>02</span><h3>Microsoft & Identity</h3><p>Windows 10/11, Windows Server, Microsoft 365, Outlook, Teams, Active Directory, and Azure AD.</p></article>
+        <article><span>03</span><h3>Networking & VPN</h3><p>TCP/IP, DNS, DHCP, Sophos SSL VPN, LAN/WAN, Wi-Fi, switching, firewalls.</p></article>
+        <article><span>04</span><h3>Infrastructure & Cloud</h3><p>Windows Server Administration, VMware, Microsoft Azure, PBX/VoIP, CCTV.</p></article>
       </div>
     </section>
 
     <section class="contact" id="contact">
       <p class="kicker">Let’s connect</p>
       <h2>Your organization deserves<br><em>dependable IT support.</em></h2>
-      <p>Open to IT Support, Help Desk, Desktop Support, Systems Support, and related technical opportunities.</p>
       <div class="actions center">
         <a class="primary cream" href="mailto:praleshpote@gmail.com">Send an email</a>
         <a class="light-border" href="tel:+13178275134">Call me</a>
@@ -242,12 +420,26 @@
   </main>
 
   <footer>
-    <div class="identity"><span class="monogram">PP</span><span><strong>Pralesh Pote</strong><small>IT Support & Systems Professional</small></span></div>
+    <div class="identity"><span class="monogram">PP</span><span><strong>Pralesh Pote</strong><small>IT Support & Systems</small></span></div>
     <p>“Reliable systems. Supported people.”</p>
-    <div><a href="#home">Back to top ↑</a><small>© <span id="year"></span> Pralesh Pote</small></div>
   </footer>
 
-  <!-- Linked JS File -->
-  <script src="./script.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.querySelector('.menu');
+      const nav = document.querySelector('.header nav');
+
+      if (menu) {
+        menu.addEventListener('click', () => {
+          const open = nav.classList.toggle('open');
+          menu.setAttribute('aria-expanded', open);
+        });
+        
+        nav.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => nav.classList.remove('open'));
+        });
+      }
+    });
+  </script>
 </body>
 </html>
